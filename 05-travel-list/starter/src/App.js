@@ -57,7 +57,7 @@ export default function App() {
   );
 }
 
-// These componens under could have been in other folders and imported here
+// These components under could have been in other folders and imported here
 
 function Logo() {
   return <h1>🏝️Far away📦</h1>;
@@ -152,7 +152,7 @@ function PackingList({ items, onDeleteItem, onToggleItems, onClearList }) {
     <div className="list">
       <ul>
         {sortedItems.map((item) => (
-          // <Item /> here referes to comp underneath
+          // <Item /> here refers to comp underneath
           <Item
             itemObject={item}
             onDeleteItem={onDeleteItem}
@@ -174,7 +174,7 @@ function PackingList({ items, onDeleteItem, onToggleItems, onClearList }) {
   );
 }
 
-// Item() is a childcomponent from PackingList() that receives all the PackingList mapped item id's, and onDeleteItem fn
+// Item() is a child-component from PackingList() that receives all the PackingList mapped item id's, and onDeleteItem fn
 function Item({ itemObject, onDeleteItem, onToggleItems }) {
   return (
     <li>
@@ -207,7 +207,7 @@ function Stats({ items }) {
   const numItems = items.length;
   // Returns the length of items with packed = true status
   const numPacked = items.filter((item) => item.packed).length;
-  // Precent of items packed
+  // Percent of items packed
   const percentage = Math.round((numPacked / numItems) * 100);
 
   return (
