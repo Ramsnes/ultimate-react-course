@@ -66,7 +66,7 @@ function Logo() {
 // Job: add new items to the array, not render them
 function Form({ onAddItems, items }) {
   const [description, setDescription] = useState("");
-  const [quantity, setquantity] = useState(1);
+  const [quantity, setQuantity] = useState(1);
 
   // Pressing submit
   function handleSubmit(e) {
@@ -91,7 +91,7 @@ function Form({ onAddItems, items }) {
 
     // Sets values back to original states after submit
     setDescription("");
-    setquantity(1);
+    setQuantity(1);
   }
 
   return (
@@ -103,7 +103,7 @@ function Form({ onAddItems, items }) {
         value={quantity}
         onChange={(e) => {
           console.log(e.target.value);
-          setquantity(Number(e.target.value)); // Number() makes it number instead of string
+          setQuantity(Number(e.target.value)); // Number() makes it number instead of string
         }}
       >
         {/* Syntax not explained for making the select quantity-number UI and fn */}
@@ -152,7 +152,7 @@ function PackingList({ items, onDeleteItem, onToggleItems, onClearList }) {
     <div className="list">
       <ul>
         {sortedItems.map((item) => (
-          // <Item /> here referes to comp underneath
+          // <Item /> here refers to comp underneath
           <Item
             itemObject={item}
             onDeleteItem={onDeleteItem}
@@ -174,7 +174,7 @@ function PackingList({ items, onDeleteItem, onToggleItems, onClearList }) {
   );
 }
 
-// Item() is a childcomponent from PackingList() that receives all the PackingList mapped item id's, and onDeleteItem fn
+// Item() is a child component from PackingList() that receives all the PackingList mapped item id's, and onDeleteItem fn
 function Item({ itemObject, onDeleteItem, onToggleItems }) {
   return (
     <li>
@@ -194,6 +194,7 @@ function Item({ itemObject, onDeleteItem, onToggleItems }) {
   );
 }
 
+// Job: Provides stats on the list' status (packed, percentage, text etc.)
 function Stats({ items }) {
   // If no items is added
   if (!items.length)
@@ -207,7 +208,7 @@ function Stats({ items }) {
   const numItems = items.length;
   // Returns the length of items with packed = true status
   const numPacked = items.filter((item) => item.packed).length;
-  // Precent of items packed
+  // Percent of items packed
   const percentage = Math.round((numPacked / numItems) * 100);
 
   return (
