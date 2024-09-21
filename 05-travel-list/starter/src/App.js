@@ -66,7 +66,7 @@ function Logo() {
 // Job: add new items to the array, not render them
 function Form({ onAddItems, items }) {
   const [description, setDescription] = useState("");
-  const [quantity, setquantity] = useState(1);
+  const [quantity, setQuantity] = useState(1);
 
   // Pressing submit
   function handleSubmit(e) {
@@ -91,7 +91,7 @@ function Form({ onAddItems, items }) {
 
     // Sets values back to original states after submit
     setDescription("");
-    setquantity(1);
+    setQuantity(1);
   }
 
   return (
@@ -103,7 +103,7 @@ function Form({ onAddItems, items }) {
         value={quantity}
         onChange={(e) => {
           console.log(e.target.value);
-          setquantity(Number(e.target.value)); // Number() makes it number instead of string
+          setQuantity(Number(e.target.value)); // Number() makes it number instead of string
         }}
       >
         {/* Syntax not explained for making the select quantity-number UI and fn */}
@@ -174,7 +174,11 @@ function PackingList({ items, onDeleteItem, onToggleItems, onClearList }) {
   );
 }
 
+<<<<<<< HEAD
 // Item() is a child-component from PackingList() that receives all the PackingList mapped item id's, and onDeleteItem fn
+=======
+// Item() is a child component from PackingList() that receives all the PackingList mapped item id's, and onDeleteItem fn
+>>>>>>> 4fb166615dd5b3167bc3099aafe4fc16378570d1
 function Item({ itemObject, onDeleteItem, onToggleItems }) {
   return (
     <li>
@@ -194,6 +198,7 @@ function Item({ itemObject, onDeleteItem, onToggleItems }) {
   );
 }
 
+// Job: Provides stats on the list' status (packed, percentage, text etc.)
 function Stats({ items }) {
   // If no items is added
   if (!items.length)
@@ -213,7 +218,9 @@ function Stats({ items }) {
   return (
     <footer className="stats">
       <em>
-        {percentage === 100
+        {numPacked === 0
+          ? "You haven't packed anything yet. Let's start packing!"
+          : percentage === 100
           ? "You got everything! Ready to go ✅"
           : ` 💼 You have ${numItems} item(s) on your list, and you already packed 
              ${numPacked} items (${percentage}%)`}
