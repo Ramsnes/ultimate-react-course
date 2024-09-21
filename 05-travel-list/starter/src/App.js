@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const initialItems = [
   { id: 1, description: "Passports", quantity: 2, packed: false },
-  { id: 2, description: "Socks", quantity: 12, packed: true },
+  { id: 2, description: "Socks", quantity: 12, packed: false },
   { id: 3, description: "Charger", quantity: 1, packed: false },
 ];
 
@@ -34,8 +34,11 @@ export default function App() {
   }
 
   // Clear btn
-  function onClearEverything() {
-    setItems([""]);
+  function handleClearList() {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete all items?"
+    );
+    if (confirmed) setItems([]);
   }
 
   // Consider 'onAddItems' etc. as imported function and function-names
@@ -47,7 +50,7 @@ export default function App() {
         items={items}
         onDeleteItem={handleDeleteItem}
         onToggleItems={handleToggleItem}
-        onClearEverything={onClearEverything}
+        onClearList={handleClearList}
       />
       <Stats items={items} />
     </div>
@@ -127,12 +130,7 @@ function Form({ onAddItems, items }) {
 }
 
 // Job: render the items array
-function PackingList({
-  items,
-  onDeleteItem,
-  onToggleItems,
-  onClearEverything,
-}) {
+function PackingList({ items, onDeleteItem, onToggleItems, onClearList }) {
   const [sortBy, setSortBy] = useState("input");
 
   // Sort by (derived state)
@@ -170,7 +168,7 @@ function PackingList({
           <option value="description">Sort by description</option>
           <option value="packed">Sort by packed status</option>
         </select>
-        <button onClick={onClearEverything()}>Clear list</button>
+        <button onClick={onClearList}>Clear list</button>
       </div>
     </div>
   );
