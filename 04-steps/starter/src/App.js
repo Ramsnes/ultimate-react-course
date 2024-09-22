@@ -37,10 +37,8 @@ function Steps() {
             <div className={step >= 3 ? "active" : ""}>3</div>
           </div>
 
-          <p className="message">
-            {/* step -1 bcus index */}
-            Step {step}: {messages[step - 1]}
-          </p>
+          {/* step -1 bcus index */}
+          <StepMessage step={step}>{messages[step - 1]}</StepMessage>
 
           <div className="buttons">
             <Button textColor="#fff" bgColor="#7950f2" onClick={handlePrevious}>
@@ -54,6 +52,15 @@ function Steps() {
         </div>
       )}
     </>
+  );
+}
+
+function StepMessage({ step, children }) {
+  return (
+    <div className="message">
+      <h3>Step {step}</h3>
+      {children}
+    </div>
   );
 }
 
