@@ -70,6 +70,7 @@ const data = [
     pages: 658,
     translations: {
       spanish: "",
+      serbian: false,
     },
     reviews: {
       goodreads: {
@@ -139,25 +140,24 @@ function getBooks() {
   return data;
 }
 
+// 'd' represent each object in data arr
+// Find returns the first conditional match
 function getBook(id) {
   return data.find((d) => d.id === id);
 }
 
-/* 
-////---- Destructuring ----//
-// Objects
-const book = getBook(3);
+////---- Destructuring Objects ----//
+const book = getBook(3); // 'book' now represents the third book (DUNE) obj in the data arr
 book;
 
 // const title = book.title;
 // const author = book.author;
-
 const { title, author, pages, publicationDate, genres, hasMovieAdaptation } =
   book;
 
 console.log(author, title, genres);
 
-// Arrays
+////---- Destructuring Arrays ----//
 // const primaryGenre = genres[0];
 // const secondaryGenre = genres[1];
 
@@ -165,15 +165,17 @@ const [firstGenre, secondGenre] = genres;
 console.log(firstGenre, secondGenre);
 
 //--- REST operator ----//
+// Rest is last
 const [primaryGenre, secondaryGenre, ...otherGenres] = genres;
 console.log(primaryGenre, secondaryGenre, otherGenres);
 
 //---- SPREAD operator ----//
-// arrays
+// Spread is first
+// arrays ...spread
 const newGenres = [...genres, "epic fantasy"];
 newGenres;
 
-// objects
+// objects ...spread
 const updatedBook = {
   // spreads out existing object values into the new object
   ...book,
@@ -186,12 +188,12 @@ console.log(updatedBook);
 
 // Arrow functions
 const getYear = (str) => str.split("-")[0];
-console.log(getYear(publicationDate));
+console.log(getYear(publicationDate)); // Gathers first[0] string bit publicationDate in Dune
 
 // Ternary
 const summary = `${title} is a book with ${pages} pages, and was written by ${author} - and published in ${getYear(
   publicationDate
-)}. The book has ${hasMovieAdaptation ? "" : "not"}been adapted as a movie.`;
+)}. The book has ${hasMovieAdaptation ? "" : "not "}been adapted as a movie.`;
 summary;
 
 // Ternary operator
@@ -200,16 +202,25 @@ pagesRange;
 console.log(`The book has ${pagesRange} pages`);
 
 //-- && || operators short-circuiting --//
+// &&
+// console.log(true || "This will NOT be logged"); // Output: true
 
 // Returns false because first operand is falsy
 console.log(false && "Some string");
-// Returns "This book has a movie" if hasMovieAdaptation is truthy
+// Returns the right side if value is truthy
 console.log(hasMovieAdaptation && "This book has a movie");
+// Returns the left side if value is truthy
+console.log(book.translations.serbian && "This book has a movie");
 
 // Returns "Some string" because first operand is truthy
 console.log("morten" && "Some string");
 // Returns 0 because first operand is falsy
 console.log(0 && "Some string");
+
+// || Returns the left side if value is truthy.
+console.log(true || "This will NOT be logged"); // Output: true
+// Returns the right side if value is falsy:
+console.log(false || "This will be logged"); // Output: "This will be logged"
 
 // Returns true because first operand is truthy
 console.log(true || "Some string");
@@ -229,15 +240,14 @@ console.log(spanishTranslation);
 //-- Optional chaining //--
 // Issue: book [3] has no librarything reviews, so must use optional chaining
 function getTotalReviewCount(book) {
+  // Optional chaining (?) only continues if the code before it is not undefined/null.
   const goodread = book.reviews?.goodreads?.reviewsCount; // 49701
-  // optilnal chain (?) only continues if code before is not defined/null. default 0 if null(??)
-  const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
+  // (??)provides a default value if the result is undefined
+  const librarything = book.reviews?.librarything?.reviewsCount ?? 0; // reviewsCount doesnt exist, so = 0. Change ?? to 1 for 49702 answer
   return goodread + librarything;
 }
 console.log(getTotalReviewCount(book));
-*/
 
-/*
 //---- // The Array map Method ---- //
 const books = getBooks();
 
@@ -288,14 +298,14 @@ const sorted = arr.slice().sort((a, b) => a - b);
 arr;
 sorted;
 // .sort() mutates the original array, unlike the other methods
-// Adding slice() makes a copy of og array, preventing mutation
+// So adding slice() first makes a copy of og array, preventing mutation
 // a = current value, b = next value
 // a - b negative = sorting ascending
 // a + b would return descending sorting
 
+// Books sorted by most pages and down (ascending)
 const sortedByPages = books.slice().sort((a, b) => b.pages - a.pages);
 sortedByPages;
-// Books sorted by most pages and down (ascending)
 
 //---- Working with immutabel arrays (not changing OG array) ----//
 // 1) add book object to array
@@ -309,16 +319,15 @@ booksAfterAdd;
 
 // 2) delete book object from array
 const booksAfterDelete = booksAfterAdd.filter((book) => book.id !== 3);
-booksAfterAdd;
+booksAfterDelete;
 
 // 3) update book object in the array
 // .map when we want to update an object inside an array
-// change LOTR pages count to 1
+// change LOTR pages count to 1. If id is not 1, returns OG book obj without any changes (: book)
 const booksAfterUpdate = booksAfterDelete.map((book) =>
   book.id === 1 ? { ...book, pages: 1 } : book
 );
 booksAfterUpdate;
-*/
 
 // ---- Asynchronous: Promises ----//
 // .then
