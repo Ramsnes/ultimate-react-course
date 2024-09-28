@@ -7,7 +7,20 @@ const messages = [
 ];
 
 export default function App() {
-  return <Steps />;
+  return (
+    <div>
+      <Steps />
+      <StepMessage step={1}>
+        <p>Step 1 children msg</p>
+      </StepMessage>
+      <StepMessage step={2}>
+        <p>Step 2 children msg</p>
+      </StepMessage>
+      <StepMessage step={3}>
+        <p>Step 3 children msg</p>
+      </StepMessage>
+    </div>
+  );
 }
 
 function Steps() {
@@ -38,14 +51,28 @@ function Steps() {
           </div>
 
           {/* step -1 bcus index */}
-          <StepMessage step={step}>{messages[step - 1]}</StepMessage>
+          <StepMessage step={step}>
+            {messages[step - 1]}
+            <div className="buttons">
+              <Button
+                bgColor="#e7e7e7"
+                textColor="#FF0000"
+                onClick={() => alert(`Learn how to ${messages[step - 1]}`)}
+              >
+                Learn how
+              </Button>
+            </div>
+          </StepMessage>
 
+          {/* Reusable buttons  */}
           <div className="buttons">
             <Button textColor="#fff" bgColor="#7950f2" onClick={handlePrevious}>
+              {/* This is the children prop  */}
               <span>👈 Previous</span>
             </Button>
 
             <Button textColor="#fff" bgColor="#7950f2" onClick={handleNext}>
+              {/* This is the children prop  */}
               <span>👉 Next</span>
             </Button>
           </div>
@@ -64,7 +91,8 @@ function StepMessage({ step, children }) {
   );
 }
 
-// {children} prop is a predetermined prop in React that let's ut pass any jsx into a non-closing componen and fill that hole
+// Reusable button created
+// {children} prop is a predetermined prop in React that let's ut pass any jsx into a non-closing componen and fill that hole, since more divs would give error
 function Button({ textColor, bgColor, onClick, children }) {
   return (
     <button
