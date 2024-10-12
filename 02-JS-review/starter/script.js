@@ -272,10 +272,10 @@ const longBooks = books
   .filter((book) => book.hasMovieAdaptation)
   .filter((book) => book.translations.spanish)
   .filter((book) => book.translations.polish);
-console.log(longBooks); // A game of thrones
+console.log(longBooks); // Only 'A game of thrones' matches the filter criterias
 
 // .filter() filters in the required conditions
-// .map() makes this a new array with only the .titles displayed in the result
+// .map() makes this a new array with only the .titles that has the 'adventure' genre displayed in the result
 const adventureBooks = books
   .filter((books) => books.genres.includes("adventure"))
   .map((book) => book.title);
@@ -289,7 +289,7 @@ pagesAllBooks; // 3227
 // Notes
 // Called 'reduce' to reduce entire array to one value (pages here)
 // acc(accumilator) = current total value, which starts at 0 (starter value).
-// 0 becomes the sum of the first book after the first iteration
+// 0 transforms into the sum of the first book after the first iteration etc ...
 
 //---- // The Array sort Method ---- //
 const arr = [3, 7, 1, 9, 6];
@@ -313,10 +313,11 @@ const newBook = {
   title: "harry pothead",
   author: "J.K potty",
 };
-const booksAfterAdd = [...books, newBook]; // takes all objects from the books array and combines newBook into a new array called 'booksAfterAdd'
+const booksAfterAdd = [...books, newBook]; // ...spreads all objects from the books array and combines newBook into a new array called 'booksAfterAdd'
 booksAfterAdd;
 
 // 2) delete book object from array
+// If the book.id is not equal to 3, the book object is included in the new array. If it is equal to 3, that book is excluded (Dune).
 const booksAfterDelete = booksAfterAdd.filter((book) => book.id !== 3);
 booksAfterDelete;
 
