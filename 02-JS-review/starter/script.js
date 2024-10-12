@@ -165,13 +165,12 @@ const [firstGenre, secondGenre] = genres;
 console.log(firstGenre, secondGenre);
 
 //--- REST operator ----//
-// Rest is last
+// Rest is last - includes the rest
 const [primaryGenre, secondaryGenre, ...otherGenres] = genres;
 console.log(primaryGenre, secondaryGenre, otherGenres);
 
 //---- SPREAD operator ----//
-// Spread is first
-// arrays ...spread
+// Spread is first - spreads out existing and includes
 const newGenres = [...genres, "epic fantasy"];
 newGenres;
 
