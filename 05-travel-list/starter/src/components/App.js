@@ -16,7 +16,7 @@ export default function App() {
 
   // Adds new items to existing arr
   function handleAddItems(item) {
-    setItems((items) => [...items, item]); // items-state + item-param
+    setItems((items) => [...items, item]); // items-state + item-param(new object passed in)
   }
 
   // Delete item from arr

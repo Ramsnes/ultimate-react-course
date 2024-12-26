@@ -55,7 +55,7 @@ export function Form({ onAddItems }) {
       <input
         type="text"
         placeholder="Item..."
-        value={description} // 'description' isn't a empty string 'cause 'onChange setDescription' changes the 'description' value at the same time underneath
+        value={description} // 'description' takes in onChange setDescription live
         onChange={(e) => {
           console.log(e.target.value); // Logs what is typed in real time
           setDescription(e.target.value); // Sets 'description' to the value input in real time
